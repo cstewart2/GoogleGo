@@ -27,6 +27,7 @@ func main(){
 	fmt.Println("Creature: standard creature.\nHealth: 30 Damage: 15\n Enter default")
 	fmt.Println("Shadow Monster: a creature with the ability to turn transparent.\nHealth: 20 Damage: 10\nEnter shadow")
 	fmt.Println("Minotaur: a hulking beast that is half man half bull.\nHealth: 60 Damage: 30\nEnter minotaur")
+	fmt.Println("Spike Monster: Monster encased in spikes.\nHealth: 30 Damage: 10\nEnter spike")
 	var text string
 	_, _ = fmt.Scanf("%s", &text)
 	fmt.Println("Enter creature name:")
@@ -39,6 +40,8 @@ func main(){
 		creature = NewShadowMan(text2)
 	}else if text == "minotaur"{
 		creature = NewMinotaur(text2)
+	}else if text == "spike"{
+		creature2 = NewSpikeMan(text2)
 	}else{
 		creature = NewCreature(text2)
 	}
@@ -47,6 +50,7 @@ func main(){
 	fmt.Println("Creature: standard creature.\nHealth: 30 Damage: 15\n Enter default")
 	fmt.Println("Shadow Monster: a creature with the ability to turn transparent.\nHealth: 20 Damage: 10\nEnter shadow")
 	fmt.Println("Minotaur: a hulking beast that is half man half bull.\nHealth: 60 Damage: 30\nEnter minotaur")
+	fmt.Println("Spike Monster: Monster encased in spikes.\nHealth: 30 Damage: 10\nEnter spike")
 	var text3 string
 	_, _ = fmt.Scanf("%s", &text3)
 	fmt.Println("Enter creature name:")
@@ -57,6 +61,8 @@ func main(){
 		creature2 = NewShadowMan(text4)
 	}else if text3 == "minotaur"{
 		creature2 = NewMinotaur(text4)
+	}else if text3 == "spike"{
+		creature2 = NewSpikeMan(text4)
 	}else{
 		creature2 = NewCreature(text4)
 	}
@@ -92,6 +98,12 @@ func NewMinotaur(name string) Creature{//Minotaur Constructor Extends Creature
 	something.attack = something.Name + " charges at target."
 	return something
 }
+func NewSpikeMan(name string) Creature{//Minotaur Constructor Extends Creature
+	something := NewCreature(name)
+	something.class = "spikeman"
+	something.attack = something.Name + " prods at target."
+	return something
+}
 func Attack(attacker Creature, defender Creature){
 	fmt.Println(attacker.Name + " attempts to attack " + defender.Name)
 	TakeDamage(defender, attacker.strength, attacker)
@@ -116,7 +128,17 @@ func TakeDamage(defender Creature, damage int, attacker Creature) {
 		}else{
 			fmt.Println("The ShadowMan went transparent to avoid attack.")
 		}
-	}else{
+	}else if defender.class == "spikeman"{
+		defender.health = defender.health -damage
+		TakeDamage(attacker, 20, defender)
+		fmt.Println(attacker.attack)
+		if defender.health <= 0{
+			fmt.Println(defender.Name + " is dead.")
+		} else{
+			fmt.Printf("%q 's Health: %d", defender.Name, defender.health )
+		}
+		
+	} else{
 		defender.health = defender.health -damage
 		fmt.Println(attacker.attack)
 		if defender.health <= 0{
@@ -127,4 +149,3 @@ func TakeDamage(defender Creature, damage int, attacker Creature) {
 	}
 
 }
-
