@@ -22,6 +22,9 @@ type ShadowMan struct{//ShadowMan Struct Extends Creature
 type Minotaur struct{//Minotaur Struct Extends Creature
 	Creature
 }
+type SpikeMan struct{//Minotaur Struct Extends Creature
+	Creature
+}
 func main(){
 	fmt.Println("Create Fighter 1. Select a type:")
 	fmt.Println("Creature: standard creature.\nHealth: 30 Damage: 15\n Enter default")
