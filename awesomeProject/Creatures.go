@@ -111,7 +111,7 @@ func TakeDamage(defender Creature, damage int, attacker Creature) {
 			if defender.health <= 0{
 				fmt.Println(defender.Name + " is dead.")
 			} else{
-				fmt.Printf("%q 's Health: %b", defender.Name, defender.health )
+				fmt.Printf("%q 's Health: %d", defender.Name, defender.health )
 			}
 		}else{
 			fmt.Println("The ShadowMan went transparent to avoid attack.")
